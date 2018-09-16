@@ -223,7 +223,7 @@ twitter_auth = {
 twitter_recipients="twitter_user_1,twitter_user_2,etc..."
 ```
 
-Create the configuration file `/var/rpi-config/cgate-monitor/cgate-config.py` and ensure it contains the following:
+Create the configuration file `/var/rpi-config/cgate-monitor/cbus-config.py` and ensure it contains the following:
 
 ```
 cgate_config = {
@@ -242,7 +242,7 @@ startup_config = {
 ```
 The above is the necessary connection details to ser2sock, running in a separate Docker container.
 
-Edit the configuration file `/var/rpi-config/cgate-monitor/cgate-config.py` again, the this time define two sets of data:
+Edit the configuration file `/var/rpi-config/cgate-monitor/cbus-config.py` again, the this time define two sets of data:
 
 - **cbus_groups**: This should contain the same CBus group information as is found in your C-Gate Toolkit project. 
 - **cbus_groups**: This should contain the same CBus unit information as is found in your C-Gate Toolkit project. 
@@ -279,7 +279,7 @@ cbus_units = {
 }
 ```
 
-Edit the configuration file ```/var/rpi-config/cgate-monitor/cgate-config.py``` again, the this time define one set of data called **event_actions**. This defines when a message should be sent to you, and what the messages are. The format of each line of data is:
+Edit the configuration file ```/var/rpi-config/cgate-monitor/cbus-config.py``` again, the this time define one set of data called **event_actions**. This defines when a message should be sent to you, and what the messages are. The format of each line of data is:
 
 ```("group_number","value, usually 0 or 255"):"Message to send")```
 
