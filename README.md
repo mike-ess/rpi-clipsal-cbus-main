@@ -65,7 +65,7 @@ Power on the Raspberry Pi. When it loads, login with username=**pi** and passwor
 
 Type ```sudo raspi-config``` and then use the following instructions. Each instructon expects you to begin navigation from the home menu.
 
-### pi User Password
+### Password
 
 Select option 1 to change the password for the **pi** user.  
 
@@ -103,21 +103,21 @@ Select Option 4 > Option I2 to select your time zone. This is important because 
 
 ![Menu Screenshot](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-option-i2.png "Menu Screenshot")
 
+Exit **raspi-config**.
+
 ### SSH client
 
 Type `sudo apt-get -y install ssh` to install the SSH server. This may be used to connect to the Raspberry Pi using an SSH client such as Putty.
 
 ### Restart
 
-Exit **raspi-config**.
-
-Reboot the Raspberry Pi by typing ```sudo shutdown -r now``` and wait for the reboot. When ready, login using login with username = **pi** and password = your own password.
+Reboot the Raspberry Pi by typing ```sudo shutdown -r now``` and wait for the reboot. When ready, login using login with username = **pi** and password = the password you set moments earlier.
 
 ### Verify Configuration
 
 At this point, the Raspberry Pi should be ready to become "headless", meaning you do not need a keyboard, mouse and monitor or TV.
 
-Take this opportunity to login to the Raspberry Pi using an SSH client. You will know the IP Address, username and password.
+Take this opportunity to login to the Raspberry Pi using an SSH client (such as [Putty](https://www.putty.org/) on a Windows machine). You will need to know the IP Address, username and password.
 
 If you cannot login via SSH, check the steps above and make corrections, until you are ready.
 
@@ -125,7 +125,7 @@ If you can login OK via SSH, you are ready to go. Shut down the Raspberry Pi by 
 
 ## Permanent Installation
 
-Now you can move the Raspberry Pi to its desired location, and you only need to plugin power and network cable (if you are not using Wi-Fi). 
+Now you can move the Raspberry Pi to its desired location, and you only need to plugin power, plus a network cable if you are not using Wi-Fi. 
 
 Do not plug in the serial connections to C-Bus yet.
 
@@ -136,9 +136,10 @@ Power the Raspberry Pi up again, and login via SSH.
 ### Firmware Update
 
 Type these commands to update the firmware.
+
 ```
 sudo rpi-update
-sudo shutdown -r now   # TODO: is this necessary?
+sudo shutdown -r now
 ```
 
 login again via SSH.
@@ -151,21 +152,17 @@ Type ```sudo bash``` to become root. All subsequent commands below will require 
 
 Type `sudo apt-get update && sudo apt-get -y upgrade` to get Raspbian up to date with packages.
 
-## Software Components
+### Install Telnet client
 
-Each of the software components are created as Docker containers to make installation easier.
+Type `sudo apt-get -y install telnet` to install the Telnet client. This is optional, however can be useful for troubleshooting as Telnet can be used to check what ports are open.
 
-### Docker
+### Install Docker
 
 Type `sudo bash -c "curl -sSL https://get.docker.com | sh"` to install Docker.
 
-TODO: Move this further up the order of installation.
-
-### Telnet client
-
-Type `sudo apt-get -y install telnet` to install the Telnet client. This is optional, however can be useful for troubleshooting as it helps check what ports are open.
-
 ## Prepare Docker Containers
+
+Each of the software components are created as Docker containers to make installation easier.
 
 ### ser2sock
 
