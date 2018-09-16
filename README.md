@@ -394,6 +394,7 @@ docker run --name=cbus-monitor \
 
 ### rpi-homebridge-cbus
 
+```
 #docker run -i -t --network=host -p 10.64.104.12:5353:5353 -p 10.64.104.12:51826:51826 --volume=/root:/root:rw  mikeess/rpi-homebridge-cbus
 
 docker run -i -t --network=host -p 5353:5353 -p 51826:51826 --volume=/root:/root:rw  mikeess/rpi-homebridge-cbus
