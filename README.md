@@ -376,7 +376,7 @@ Linked to Host:
 docker run --name=cbus-monitor \
   -d \
   -i -t \
-  --network=host
+  --network=host \
   --mount type=bind,source=/var/rpi-config/cgate-monitor,destination=/var/rpi-config/cgate-monitor \
   mikeess/rpi-cbus-monitor
 ```
@@ -386,7 +386,7 @@ Linked to Bridge:
 docker run --name=cbus-monitor \
   -d \
   -i -t \
-  --network=bridge
+  --network=bridge \
   --link cgate \
   --mount type=bind,source=/var/rpi-config/cgate-monitor,destination=/var/rpi-config/cgate-monitor \
   mikeess/rpi-cbus-monitor
