@@ -169,7 +169,7 @@ cp [path/to/your/project/file]/[projectname].xml /var/rpi-config/cgate/MY-HOME.x
 
 If you need to put the file on your Raspberry Pi, then from a Windows machine you can use the [**pscp**](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) SCP client to transfer the file (full instructions [here](https://www.ssh.com/ssh/putty/putty-manuals/0.68/Chapter5.html).
 
-``
+```
 pscp [C:\path\to\your\project\file]\projectname].xml pi@[IP address of R-Pi]:/var/rpi-config/cgate/MYHOME.xml
 ```
 
@@ -182,7 +182,7 @@ pscp C:\Clipsal\C-Gate2\tag\john-doe.xml pi@192.168.0.10:/var/rpi-config/cgate/M
 
 Type `docker pull mikeess/rpi-cgate-monitor` to download the Docker image.
 
-Create the configuration file ```/var/rpi-config/cgate-monitor/twitter-config.py``` and ensure it contains your Twitter API credentials. You can register with Twitter to use the API, and gain your own set of credentials, at https://developer.twitter.com/en/docs/basics/getting-started .
+Create the configuration file `/var/rpi-config/cgate-monitor/twitter-config.py` and ensure it contains your Twitter API credentials. You can register with Twitter to use the API, and gain your own set of credentials, at https://developer.twitter.com/en/docs/basics/getting-started .
 
 ```
 twitter_auth = {
@@ -195,7 +195,7 @@ twitter_auth = {
 twitter_recipients="twitter_user_1,twitter_user_2,etc..."
 ```
 
-Create the configuration file ```/var/rpi-config/cgate-monitor/cgate-config.py``` and ensure it contains the following:
+Create the configuration file `/var/rpi-config/cgate-monitor/cgate-config.py` and ensure it contains the following:
 
 ```
 cgate_config = {
@@ -214,7 +214,7 @@ startup_config = {
 ```
 The above is the necessary connection details to ser2sock, running in a separate Docker container.
 
-Edit the configuration file ```/var/rpi-config/cgate-monitor/cgate-config.py``` again, the this time define two sets of data:
+Edit the configuration file `/var/rpi-config/cgate-monitor/cgate-config.py` again, the this time define two sets of data:
 
 - cbus_groups: This should contain the same CBus group information as is found in your CGate project. 
 - cbus_groups: This should contain the same CBus unit information as is found in your CGate project. 
