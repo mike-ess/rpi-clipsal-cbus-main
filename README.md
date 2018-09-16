@@ -65,11 +65,13 @@ Power on the Raspberry Pi. When it loads, login with username=**pi** and passwor
 
 Type ```sudo raspi-config``` and then use the following instructions. Each instructon expects you to begin navigation from the home menu.
 
-### Network Settings
+### pi User Password
 
 Select option 1 to change the password for the **pi** user.  
 
 ![Menu Screenshot](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-main-menu.png "Menu Screenshot")
+
+### Hostname
 
 Select Option 2 > Option N1 to set the hostname. This should be a name that no other device on your network has (e.g. **rpi-cbus**)
 
@@ -77,13 +79,21 @@ Select Option 2 > Option N1 to set the hostname. This should be a name that no o
 
 ![Menu Screenshot](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-option-n1.png "Menu Screenshot")
 
+### Wi-Fi Connection
+
 If your Raspberry Pi is intended to be connected to Wi-Fi, when select Option 2 > Option N2 and then enter the SSID of your network, and the password of your network. Then, Select Option 4 > Option I4 to select the right WiFi country.
+
+![Menu Screenshot](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-option-2.png "Menu Screenshot")
+
+![Menu Screenshot](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-option-n2.png "Menu Screenshot")
 
 ![Menu Screenshot](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-option-4.png "Menu Screenshot")
 
 ![Menu Screenshot](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-option-i4.png "Menu Screenshot")
 
-TODO: Fixed IP Address
+### Fixed IP Address
+
+TODO
 
 ### Localisation Settings
 
