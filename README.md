@@ -162,7 +162,7 @@ Type `sudo bash -c "curl -sSL https://get.docker.com | sh"` to install Docker.
 
 ## Prepare Docker Containers
 
-Each of the software components are created as Docker containers to make installation easier.
+Each of the software components are created as Docker containers to make installation easier. The instructions will work through installation and configuration of all Docker containers, then startup of them all towards the end.
 
 ### ser2sock
 
@@ -170,36 +170,45 @@ Type `docker pull mikeess/rpi-ser2sock` to download the Docker image.
 
 No configuration is required. Look in the [Dockerfile of ser2sock](https://github.com/mike-ess/rpi-ser2sock/blob/master/Dockerfile) for details of (a) what port number is used and (b) what device is used to connect to the serial interface on the Raspberry Pi.
 
-TODO: Rephrase the above.
-
 ### Clipsal C-Gate Software
 
 Type `docker pull mikeess/rpi-cgate` to download the Docker image.
 
 This image is built on the assumption you already have a C-Gate project file. This project file will have been created by your installer or electrician when C-Bus was installed and configured using the [C-Bus Toolkit](http://www2.clipsal.com/cis/technical/downloads/c-bus_toolkit) software. As part of installation on your Raspberry Pi, you will provide a *copy* of that file on your Raspberry Pi to C-Gate for read-only purposes. Keep your original project file safe, and treat it as your master copy.
 
-Copy the project file onto your Raspberry Pi and place it in the /var/rpi-config/cgate directory.
+The file will need to be called `MY-HOME.xml` regardless of its original filename. 
+
+Create a directory to store the C-Gate project file:
+```
+mkdir -p /var/rpi-config/cgate
+```
+
+Copy the project file onto your Raspberry Pi and place it in the `/var/rpi-config/cgate` directory.
 
 If you have already put the file on your Raspberry Pi:
 ```
-mkdir -p /var/rpi-config/cgate
 cp [path/to/your/project/file]/[projectname].xml /var/rpi-config/cgate/MY-HOME.xml
 ```
 
 If you need to put the file on your Raspberry Pi, then from a Windows machine you can use the [**pscp**](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) SCP client to transfer the file (full instructions [here](https://www.ssh.com/ssh/putty/putty-manuals/0.68/Chapter5.html).
 
 ```
-pscp [C:\path\to\your\project\file]\projectname].xml pi@[IP address of R-Pi]:/var/rpi-config/cgate/MYHOME.xml
+pscp [C:\path\to\your\project\file]\projectname].xml pi@[IP address of R-Pi]:/var/rpi-config/cgate/MY-HOME.xml
 ```
 
 Example:
 ```
-pscp C:\Clipsal\C-Gate2\tag\john-doe.xml pi@192.168.0.10:/var/rpi-config/cgate/MYHOME.xml
+pscp C:\Clipsal\C-Gate2\tag\mike-ess.xml pi@192.168.0.10:/var/rpi-config/cgate/MY-HOME.xml
 ```
 
 ### C-Gate Monitor
 
 Type `docker pull mikeess/rpi-cgate-monitor` to download the Docker image.
+
+Create a directory to store the C-Gate Monitor configuration:
+```
+mkdir -p /var/rpi-config/cgate-monitor
+```
 
 Create the configuration file `/var/rpi-config/cgate-monitor/twitter-config.py` and ensure it contains your Twitter API credentials. You can register with Twitter to use the API, and gain your own set of credentials, at https://developer.twitter.com/en/docs/basics/getting-started .
 
@@ -235,10 +244,10 @@ The above is the necessary connection details to ser2sock, running in a separate
 
 Edit the configuration file `/var/rpi-config/cgate-monitor/cgate-config.py` again, the this time define two sets of data:
 
-- cbus_groups: This should contain the same CBus group information as is found in your CGate project. 
-- cbus_groups: This should contain the same CBus unit information as is found in your CGate project. 
+- *cbus_groups*: This should contain the same CBus group information as is found in your C-Gate Toolkit project. 
+- *cbus_groups*: This should contain the same CBus unit information as is found in your C-Gate Toolkit project. 
 
-Note the groups and units do not need to be named the same in this configuration, as they are in you CGate project, but they should have the same intent. The installer may have given the groups names that are not intended to be human readable, whereas for messages you want the gruops to be names appropriately. Example: In CGate, group 5 may be called "5 Kitchen Downstairs" where for rpi-cgate-monitor you can just call it "Kitchen".
+Note the groups and units *do not* need to be named the same in this configuration, as they are in your C-Gate Toolkit project, but they *should have* the same intent. The installer may have given the groups names that are not intended to be human readable, whereas with C-Gate Monitor you will want the groups to be named appropriately. Example: In C-Gate Toolkit, group 5 may be called "5 Kitchen Downstairs" where for CGate Monitor you can just call it "Kitchen".
 
 Here is a sample of what the data should look like. Substitute with your own data, based on your CGate project, and the names you wish to use.
 
@@ -270,13 +279,13 @@ cbus_units = {
 }
 ```
 
-Edit the configuration file ```/var/rpi-config/cgate-monitor/cgate-config.py``` again, the this time define one set of data called event_actions. This defines when a message should be sent to you. The format of each line of data is:
+Edit the configuration file ```/var/rpi-config/cgate-monitor/cgate-config.py``` again, the this time define one set of data called *event_actions*. This defines when a message should be sent to you, and what the messages are. The format of each line of data is:
 
 ```("group_number","value, usually 0 or 255"):"Message to send")```
 
 0 means a light has been switched completely off. 255 indicates a light has been switched completely on. Groups connected to relay circuits, bus couplers, trigger groups etc only use these two values. Dimmer circuits can use the full range of 0-255, however it is recommended you only use 0 and 255 because other values will be difficult to achieve unless you have specific programming for those values.
 
-Here is a sample of what the data should look like. Substitute with your own data. What you put here is up to you! The only things that matters is that you use the correct group numbers corressponding with cbus_groups above.
+Here is a sample of what the data should look like. Substitute with your own data. What you put here is up to you! The only things that matters is that you use the correct group numbers corresponding with *cbus_groups* data above.
 
 ```
 event_actions = {
@@ -289,7 +298,6 @@ event_actions = {
     ("10","255"):"All Lights Off"
 }
 ```
-
 
 ### Homebridge & Homebridge-CBus
 
