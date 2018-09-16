@@ -190,7 +190,7 @@ If you have already put the file on your Raspberry Pi:
 cp [path/to/your/project/file]/[projectname].xml /var/rpi-config/cgate/MY-HOME.xml
 ```
 
-If you need to put the file on your Raspberry Pi, then from a Windows machine you can use the [**pscp**](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) SCP client to transfer the file (full instructions [here](https://www.ssh.com/ssh/putty/putty-manuals/0.68/Chapter5.html).
+If you need to put the file on your Raspberry Pi, then from a Windows machine you can use the [**pscp**](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) SCP client to transfer the file (full instructions [here](https://www.ssh.com/ssh/putty/putty-manuals/0.68/Chapter5.html)).
 
 ```
 pscp [C:\path\to\your\project\file]\projectname].xml pi@[IP address of R-Pi]:/var/rpi-config/cgate/MY-HOME.xml
