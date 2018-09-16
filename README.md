@@ -373,23 +373,23 @@ docker run --name=cgate \
 
 Linked to Host:
 ```
-docker run --name=cgate-monitor \
+docker run --name=rpi-cgate-monitor \
   -d \
   -i -t \
   --network=host \
   --mount type=bind,source=/var/rpi-config/cgate-monitor,destination=/var/rpi-config/cgate-monitor \
-  mikeess/rpi-cbus-monitor
+  mikeess/rpi-cgate-monitor
 ```
 
 Linked to Bridge:
 ```
-docker run --name=cgate-monitor \
+docker run --name=rpi-cgate-monitor \
   -d \
   -i -t \
   --network=bridge \
   --link cgate \
   --mount type=bind,source=/var/rpi-config/cgate-monitor,destination=/var/rpi-config/cgate-monitor \
-  mikeess/rpi-cbus-monitor
+  mikeess/rpi-cgate-monitor
 ```
 
 ### rpi-homebridge-cbus
