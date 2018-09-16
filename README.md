@@ -373,7 +373,7 @@ docker run --name=cgate \
 
 Linked to Host:
 ```
-docker run --name=cbus-monitor \
+docker run --name=cgate-monitor \
   -d \
   -i -t \
   --network=host \
@@ -383,7 +383,7 @@ docker run --name=cbus-monitor \
 
 Linked to Bridge:
 ```
-docker run --name=cbus-monitor \
+docker run --name=cgate-monitor \
   -d \
   -i -t \
   --network=bridge \
