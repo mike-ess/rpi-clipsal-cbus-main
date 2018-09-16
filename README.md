@@ -255,6 +255,8 @@ Edit the configuration file ```/var/rpi-config/cgate-monitor/cgate-config.py``` 
 
 ```("group_number","value, usually 0 or 255"):"Message to send")```
 
+0 means a light has been switched completely off. 255 indicates a light has been switched completely on. Groups connected to relay circuits, bus couplers, trigger groups etc only use these two values. Dimmer circuits can use the full range of 0-255, however it is recommended you only use 0 and 255 because other values will be difficult to achieve unless you have specific programming for those values.
+
 Here is a sample of what the data should look like. Substitute with your own data. What you put here is up to you! The only things that matters is that you use the correct group numbers corressponding with cbus_groups above.
 
 ```
