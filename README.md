@@ -377,7 +377,7 @@ docker run --name=cbus-monitor \
   -d \
   -i -t \
   --network=host
-  --mount type=bind,source=/var/rpi-config/cgate,destination=/var/rpi-config/cgate \
+  --mount type=bind,source=/var/rpi-config/cgate-monitor,destination=/var/rpi-config/cgate-monitor \
   mikeess/rpi-cbus-monitor
 ```
 
@@ -388,7 +388,7 @@ docker run --name=cbus-monitor \
   -i -t \
   --network=bridge
   --link cgate \
-  --mount type=bind,source=/var/rpi-config/cgate,destination=/var/rpi-config/cgate \
+  --mount type=bind,source=/var/rpi-config/cgate-monitor,destination=/var/rpi-config/cgate-monitor \
   mikeess/rpi-cbus-monitor
 ```
 
