@@ -230,7 +230,7 @@ cgate_config = {
     "ip_address":"127.0.0.1",
     "command_port":20023,
     "event_port":20025,
-    "cgate_project":"MYHOME",
+    "cgate_project":"MY-HOME",
     "cbus_network":"254",
     "cbus_application":"56"   
 }
@@ -244,8 +244,8 @@ The above is the necessary connection details to ser2sock, running in a separate
 
 Edit the configuration file `/var/rpi-config/cgate-monitor/cgate-config.py` again, the this time define two sets of data:
 
-- *cbus_groups*: This should contain the same CBus group information as is found in your C-Gate Toolkit project. 
-- *cbus_groups*: This should contain the same CBus unit information as is found in your C-Gate Toolkit project. 
+- **cbus_groups**: This should contain the same CBus group information as is found in your C-Gate Toolkit project. 
+- **cbus_groups**: This should contain the same CBus unit information as is found in your C-Gate Toolkit project. 
 
 Note the groups and units *do not* need to be named the same in this configuration, as they are in your C-Gate Toolkit project, but they *should have* the same intent. The installer may have given the groups names that are not intended to be human readable, whereas with C-Gate Monitor you will want the groups to be named appropriately. Example: In C-Gate Toolkit, group 5 may be called "5 Kitchen Downstairs" where for CGate Monitor you can just call it "Kitchen".
 
@@ -279,13 +279,13 @@ cbus_units = {
 }
 ```
 
-Edit the configuration file ```/var/rpi-config/cgate-monitor/cgate-config.py``` again, the this time define one set of data called *event_actions*. This defines when a message should be sent to you, and what the messages are. The format of each line of data is:
+Edit the configuration file ```/var/rpi-config/cgate-monitor/cgate-config.py``` again, the this time define one set of data called **event_actions**. This defines when a message should be sent to you, and what the messages are. The format of each line of data is:
 
 ```("group_number","value, usually 0 or 255"):"Message to send")```
 
 0 means a light has been switched completely off. 255 indicates a light has been switched completely on. Groups connected to relay circuits, bus couplers, trigger groups etc only use these two values. Dimmer circuits can use the full range of 0-255, however it is recommended you only use 0 and 255 because other values will be difficult to achieve unless you have specific programming for those values.
 
-Here is a sample of what the data should look like. Substitute with your own data. What you put here is up to you! The only things that matters is that you use the correct group numbers corresponding with *cbus_groups* data above.
+Here is a sample of what the data should look like. Substitute with your own data. What you put here is up to you! The only things that matters is that you use the correct group numbers corresponding with **cbus_groups** data above.
 
 ```
 event_actions = {
