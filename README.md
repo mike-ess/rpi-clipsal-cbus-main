@@ -69,17 +69,29 @@ Type ```sudo raspi-config``` and then use the following instructions. Each instr
 
 Select option 1 to change the password for the **pi** user.  
 
-Select Option 2 > Option N1 to set the hostname. This should be a name that no other device on your network has (e.g. **cpi-cbus**)
+![alt text](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-main-menu.png "Menu Screenshot")
 
-If your Raspberry Pi is intended to be connected to Wi-Fi, when select Option 2 > Option N2 and then enter the SSID of your network, and the password of your network. Then, Select Option 4 > Option I2 to select the right WiFi country.
+Select Option 2 > Option N1 to set the hostname. This should be a name that no other device on your network has (e.g. **rpi-cbus**)
+
+![alt text](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-option-2 "Menu Screenshot")
+
+![alt text](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-option-n1 "Menu Screenshot")
+
+If your Raspberry Pi is intended to be connected to Wi-Fi, when select Option 2 > Option N2 and then enter the SSID of your network, and the password of your network. Then, Select Option 4 > Option I4 to select the right WiFi country.
+
+![alt text](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-option-4 "Menu Screenshot")
+
+![alt text](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-option-i4 "Menu Screenshot")
 
 TODO: Fixed IP Address
 
 ### Localisation Settings
 
-Select Option 4 > Option I2 to select your time zone.
+Select Option 4 > Option I2 to select your time zone. This is important because the default is UK keyboard layout, which will not be right for many users.
 
-Select Option 4 > Option I2 to select your keyboard layout. This is important because the default is UK keyboard layout, which will not be right for many users.
+![alt text](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-option-4 "Menu Screenshot")
+
+![alt text](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-option-i2 "Menu Screenshot")
 
 ### SSH client
 
