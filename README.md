@@ -355,7 +355,7 @@ docker run --name=cgate \
   -p `hostname -I | awk '{print $1;}'`:20023:20023 \
   --expose 20023 \
   --network=host \
-  --mount type=bind,source=/var/rpi-config/cgate,destination=/var/rpi-config/cgate \
+  --mount type=bind,source=/var/rpi-config/cgate/MY-HOME.xml,destination=/clipsal/cgate/tag/MY-HOME.xml \
   mikeess/rpi-cgate
 ```
 
@@ -369,7 +369,7 @@ docker run --name=cgate \
   --link ser2sock \
   --expose 20023 \
   --network=host \
-  --mount type=bind,source=/var/rpi-config/cgate,destination=/var/rpi-config/cgate \
+  --mount type=bind,source=/var/rpi-config/cgate/MY-HOME.xml,destination=/clipsal/cgate/tag/MY-HOME.xml \
   mikeess/rpi-cgate
 ```
 
