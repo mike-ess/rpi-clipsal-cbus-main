@@ -324,6 +324,7 @@ Linked to Host:
 docker run --name=ser2sock \
   -d \
   -i -t \
+  --env TZ=`cat /etc/timezone` \
   --expose 10001 \
   --device=/dev/serial0 \
   --network=host \
@@ -335,6 +336,7 @@ Linked to Bridge:
 docker run --name=ser2sock \
   -d \
   -i -t \
+  --env TZ=`cat /etc/timezone` \
   --expose 10001 \
   --device=/dev/serial0 \
   --network=bridge\
@@ -348,6 +350,7 @@ Linked to Host:
 docker run --name=cgate \
   -d \
   -i -t \
+  --env TZ=`cat /etc/timezone` \
   -p 127.0.0.1:20023:20023 \
   -p `hostname -I | awk '{print $1;}'`:20023:20023 \
   --expose 20023 \
@@ -361,6 +364,7 @@ Linked to Bridge:
 docker run --name=cgate \
   -d \
   -i -t \
+  --env TZ=`cat /etc/timezone` \
   -p 127.0.0.1:20023:20023 \
   --link ser2sock \
   --expose 20023 \
@@ -375,9 +379,12 @@ Linked to Host:
 ```
 docker run --name=rpi-cgate-monitor \
   -d \
+  --env TZ=`cat /etc/timezone` \
   -i -t \
   --network=host \
-  --mount type=bind,source=/var/rpi-config/cgate-monitor,destination=/var/rpi-config/cgate-monitor \
+  --mount type=bind,source=/var/rpi-config/cgate-monitor/cbus_config.py,destination=/python/cgate-monitor/cbus_config.py \
+  --mount type=bind,source=/var/rpi-config/cgate-monitor/twitter_config.py,destination=/python/cgate-monitor/twitter_config.py \
+  --mount type=bind,source=/var/rpi-config/cgate-monitor/email_config.py,destination=/python/cgate-monitor/email_config.py \
   mikeess/rpi-cgate-monitor
 ```
 
@@ -386,9 +393,12 @@ Linked to Bridge:
 docker run --name=rpi-cgate-monitor \
   -d \
   -i -t \
+  --env TZ=`cat /etc/timezone` \
   --network=bridge \
   --link cgate \
-  --mount type=bind,source=/var/rpi-config/cgate-monitor,destination=/var/rpi-config/cgate-monitor \
+  --mount type=bind,source=/var/rpi-config/cgate-monitor/cbus_config.py,destination=/python/cgate-monitor/cbus_config.py \
+  --mount type=bind,source=/var/rpi-config/cgate-monitor/twitter_config.py,destination=/python/cgate-monitor/twitter_config.py \
+  --mount type=bind,source=/var/rpi-config/cgate-monitor/email_config.py,destination=/python/cgate-monitor/email_config.py \
   mikeess/rpi-cgate-monitor
 ```
 
