@@ -6,7 +6,7 @@ THIS IS A WORK IN PROGRESS, NOT FINISHED YET.
 
 The instructions below were created on a Raspberry Pi Model 3B with 16GB SD Card. If you use different hardware, you may experience difficulties due to differences in hardware, especially regarding Serial Port configuration.
 
-These instructions were created on Raspbian Stretch Lite, specifically image version **2017-11-29-raspbian-stretch-lite.img**.
+These instructions were created on Raspbian Stretch Lite, specifically image version **2018-06-27-raspbian-stretch-lite.img**.
 
 
 # Get prepared
@@ -63,7 +63,7 @@ Power on the Raspberry Pi. When it loads, login with username=**pi** and passwor
 
 ## Initial setup
 
-Type ```sudo raspi-config``` and then use the following instructions. Each instructon expects you to begin navigation from the home menu.
+Type ```sudo raspi-config``` and then use the following instructions. Each instruction below expects you to begin navigation from the home menu.
 
 ### Password
 
@@ -91,10 +91,6 @@ If your Raspberry Pi is intended to be connected to Wi-Fi, when select Option 2 
 
 ![Menu Screenshot](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-option-i4.png "Menu Screenshot")
 
-### Fixed IP Address
-
-TODO
-
 ### Localisation Settings
 
 Select Option 4 > Option I2 to select your time zone. This is important because the default is UK keyboard layout, which will not be right for many users.
@@ -105,33 +101,38 @@ Select Option 4 > Option I2 to select your time zone. This is important because 
 
 Exit **raspi-config**.
 
+### Fixed IP Address
+
+TODO
+
+### Serial Port Settings
+
+Type ```systemctl disable hciuart``` to disable unwanted usage of the UART serial interface.
+
+Type ```sudo nano /boot/config.txt``` to edit the config.txt file.
+
+Add these lines into the file, to disable Bluetooth and enable the UART serial interface:
+```
+# Enable Serial Port
+enable_uart=1
+# Disable Bluetooth
+dtoverlay=pi3-disable-bt
+```
+Save and close the file.
+
+Type ```sudo nano /boot/cmdline.txt``` to edit the cmdline.txt file.
+
+Remove the section of text that says ```console=serial0,115200```, to disable console output to the serial interface.
+
+Save and close the file.
+
 ### SSH client
 
 Type `sudo apt-get -y install ssh` to install the SSH server. This may be used to connect to the Raspberry Pi using an SSH client such as Putty.
-
-### Restart
-
-Reboot the Raspberry Pi by typing ```sudo shutdown -r now``` and wait for the reboot. When ready, login using login with username = **pi** and password = the password you set moments earlier.
-
-### Verify Configuration
-
-At this point, the Raspberry Pi should be ready to become "headless", meaning you do not need a keyboard, mouse and monitor or TV.
-
-Take this opportunity to login to the Raspberry Pi using an SSH client (such as [Putty](https://www.putty.org/) on a Windows machine). You will need to know the IP Address, username and password.
-
-If you cannot login via SSH, check the steps above and make corrections, until you are ready.
-
-If you can login OK via SSH, you are ready to go. Shut down the Raspberry Pi by typing ```sudo shutdown -h now``` and it will usually only take a few seconds to fully shut down.
-
-## Permanent Installation
-
-Now you can move the Raspberry Pi to its desired location, and you only need to plugin power, plus a network cable if you are not using Wi-Fi. 
-
-Do not plug in the serial connections to C-Bus yet.
-
-Power the Raspberry Pi up again, and login via SSH.
-
-## Further Setup
+```
+#systemctl start ssh.service
+systemctl enable ssh.service
+```
 
 ### Firmware Update
 
@@ -139,22 +140,52 @@ Type these commands to update the firmware.
 
 ```
 sudo rpi-update
-sudo shutdown -r now
 ```
 
-login again via SSH.
+After the Raspberry Pi has had time to restart, login again via SSH.
+
+### Restart
+
+Reboot the Raspberry Pi by typing:
+
+```
+sudo shutdown -r now
+``` 
+Wait for the reboot, then login using login with username = **pi** and password = the password you set moments earlier.
+
+### Verify Configuration
+
+At this point, the Raspberry Pi should be ready to become "headless", meaning you do not need a keyboard, mouse and monitor or TV.
+
+If you wish, take this opportunity to login to the Raspberry Pi using an SSH client (such as [Putty](https://www.putty.org/) on a Windows machine). You will need to know the IP Address, username and password.
+
+If you cannot login via SSH, check all previous steps (especially the IP Address and the SSH client) and make corrections, until you are ready.
+
+If you can login OK via SSH, you are ready to go. Shut down the Raspberry Pi by typing ```sudo shutdown -h now``` and it will usually only take a few seconds to fully shut down.
+
+## Permanent Installation
+
+Now you can move the Raspberry Pi to its desired location, and you only need to plugin power, plus a network cable if you are not using Wi-Fi. 
+
+You are ready to connect the Raspberry Pi to C-Bus.
+
+TODO: Add more detail here.
+
+Power the Raspberry Pi up again, and login via SSH.
+
+## Further Setup
 
 ### Elevate to root
 
 Type ```sudo bash``` to become root. All subsequent commands below will require root.
 
+### Telnet Client
+
+Type `sudo apt-get -y install telnet` to install the Telnet client. This is optional, however can be useful for troubleshooting as Telnet can be used to check what ports are open.
+
 ### Update Packages
 
 Type `sudo apt-get update && sudo apt-get -y upgrade` to get Raspbian up to date with packages.
-
-### Install Telnet client
-
-Type `sudo apt-get -y install telnet` to install the Telnet client. This is optional, however can be useful for troubleshooting as Telnet can be used to check what ports are open.
 
 ### Install Docker
 
@@ -181,24 +212,15 @@ The file will need to be called `MY-HOME.xml` regardless of its original filenam
 Create a directory to store the C-Gate project file:
 ```
 mkdir -p /var/rpi-config/cgate
+chmod 777 -R /var/rpi-config
 ```
 
-Copy the project file onto your Raspberry Pi and place it in the `/var/rpi-config/cgate` directory.
+Copy the project file onto your Raspberry Pi and place it in the `/var/rpi-config/cgate` directory. The filename must be set to `MY-HOME.xml`
 
-If you have already put the file on your Raspberry Pi:
-```
-cp [path/to/your/project/file]/[projectname].xml /var/rpi-config/cgate/MY-HOME.xml
-```
-
-If you need to put the file on your Raspberry Pi, then from a Windows machine you can use the [**pscp**](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) SCP client to transfer the file (full instructions [here](https://www.ssh.com/ssh/putty/putty-manuals/0.68/Chapter5.html)).
+Example command for copying from a Windows 10 computer to your Raspberry Pi with IP Address 192.168.0.100:
 
 ```
-pscp [C:\path\to\your\project\file]\projectname].xml pi@[IP address of R-Pi]:/var/rpi-config/cgate/MY-HOME.xml
-```
-
-Example:
-```
-pscp C:\Clipsal\C-Gate2\tag\mike-ess.xml pi@192.168.0.10:/var/rpi-config/cgate/MY-HOME.xml
+scp "C:\Clipsal\C-Gate2\tag\mike-ess.xml" pi@192.168.0.100:/var/rpi-config/cgate/MY-HOME.xml
 ```
 
 ### C-Gate Monitor
@@ -301,6 +323,8 @@ event_actions = {
 
 ### Homebridge & Homebridge-CBus
 
+This is still a work in progress....
+
 Type `docker pull mikeess/rpi-homebridge-cbus` to pull the Docker image from Docker Hub.
 
 Create your config file ```/root/.homebridge/config.json```. For further information about what this file should contain, see the **Configuration** section of the actual [Homebridge-cbus documentation](https://github.com/anthonywebb/homebridge-cbus/blob/master/README.md).
@@ -321,25 +345,13 @@ docker run --d --network=host -p 10.64.104.12:5353:5353 -p 10.64.104.12:51826:51
 
 Linked to Host:
 ```
-docker run --name=ser2sock \
+docker run --name=rpi-ser2sock \
   -d \
   -i -t \
   --env TZ=`cat /etc/timezone` \
   --expose 10001 \
   --device=/dev/serial0 \
   --network=host \
-  mikeess/rpi-ser2sock
-```
-
-Linked to Bridge:
-```
-docker run --name=ser2sock \
-  -d \
-  -i -t \
-  --env TZ=`cat /etc/timezone` \
-  --expose 10001 \
-  --device=/dev/serial0 \
-  --network=bridge\
   mikeess/rpi-ser2sock
 ```
 
@@ -347,7 +359,7 @@ docker run --name=ser2sock \
 
 Linked to Host:
 ```
-docker run --name=cgate \
+docker run --name=rpi-cgate \
   -d \
   -i -t \
   --env TZ=`cat /etc/timezone` \
@@ -355,21 +367,7 @@ docker run --name=cgate \
   -p `hostname -I | awk '{print $1;}'`:20023:20023 \
   --expose 20023 \
   --network=host \
-  --mount type=bind,source=/var/rpi-config/cgate/MY-HOME.xml,destination=/clipsal/cgate/tag/MY-HOME.xml \
-  mikeess/rpi-cgate
-```
-
-Linked to Bridge:
-```
-docker run --name=cgate \
-  -d \
-  -i -t \
-  --env TZ=`cat /etc/timezone` \
-  -p 127.0.0.1:20023:20023 \
-  --link ser2sock \
-  --expose 20023 \
-  --network=host \
-  --mount type=bind,source=/var/rpi-config/cgate/MY-HOME.xml,destination=/clipsal/cgate/tag/MY-HOME.xml \
+  --mount type=bind,source=/var/rpi-config/cgate/MY-HOME.xml,destination=/clipsal/original-project/MY-HOME.xml \
   mikeess/rpi-cgate
 ```
 
@@ -388,21 +386,9 @@ docker run --name=rpi-cgate-monitor \
   mikeess/rpi-cgate-monitor
 ```
 
-Linked to Bridge:
-```
-docker run --name=rpi-cgate-monitor \
-  -d \
-  -i -t \
-  --env TZ=`cat /etc/timezone` \
-  --network=bridge \
-  --link cgate \
-  --mount type=bind,source=/var/rpi-config/cgate-monitor/cbus_config.py,destination=/python/cgate-monitor/cbus_config.py \
-  --mount type=bind,source=/var/rpi-config/cgate-monitor/twitter_config.py,destination=/python/cgate-monitor/twitter_config.py \
-  --mount type=bind,source=/var/rpi-config/cgate-monitor/email_config.py,destination=/python/cgate-monitor/email_config.py \
-  mikeess/rpi-cgate-monitor
-```
-
 ### rpi-homebridge-cbus
+
+This is still a work in progress....
 
 ```
 #docker run -i -t --network=host -p 10.64.104.12:5353:5353 -p 10.64.104.12:51826:51826 --volume=/root:/root:rw  mikeess/rpi-homebridge-cbus
