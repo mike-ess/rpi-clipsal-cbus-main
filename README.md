@@ -4,7 +4,7 @@ THIS IS A WORK IN PROGRESS, NOT FINISHED YET.
 
 # Assumptions
 
-The instructions below were created on a Raspberry Pi Model 3B with 16GB SD Card. If you use different hardware, you may experience difficulties due to differences in hardware, especially regarding Serial Port configuration.
+The instructions below were created on a Raspberry Pi Model 3B with 16GB SD Card. If you use different hardware, you may experience difficulties due to differences in hardware, especially regarding Serial Interface configuration.
 
 These instructions were created on Raspbian Stretch Lite, specifically image version **2018-06-27-raspbian-stretch-lite.img**.
 
@@ -103,9 +103,25 @@ Exit **raspi-config**.
 
 ### Fixed IP Address
 
-TODO
+Type ```sudo nano /etc/network/interfaces.d/eth0``` and edit the file contents as shown below. This example sets the IP address to 10.64.104.10 with a default gateway of 10.64.104.1 and a subnet mask of 255.255.255.0:
+```
+# Configure loopback
+auto lo
+iface lo inet loopback
 
-### Serial Port Settings
+# Configure network
+auto eth0
+iface eth0 inet static
+address 10.64.104.10
+gateway 10.64.104.1
+netmask 255.255.255.0
+network 10.64.104.0
+broadcast 10.64.104.255
+```
+
+The new IP address will not take affect until the Raspberry Pi is next restarted.
+
+### Serial Interface Settings
 
 Type ```systemctl disable hciuart``` to disable unwanted usage of the UART serial interface.
 
@@ -113,7 +129,7 @@ Type ```sudo nano /boot/config.txt``` to edit the config.txt file.
 
 Add these lines into the file, to disable Bluetooth and enable the UART serial interface:
 ```
-# Enable Serial Port
+# Enable Serial Interface
 enable_uart=1
 # Disable Bluetooth
 dtoverlay=pi3-disable-bt
@@ -130,7 +146,6 @@ Save and close the file.
 
 Type `sudo apt-get -y install ssh` to install the SSH server. This may be used to connect to the Raspberry Pi using an SSH client such as Putty.
 ```
-#systemctl start ssh.service
 systemctl enable ssh.service
 ```
 
@@ -217,10 +232,10 @@ chmod 777 -R /var/rpi-config
 
 Copy the project file onto your Raspberry Pi and place it in the `/var/rpi-config/cgate` directory. The filename must be set to `MY-HOME.xml`
 
-Example command for copying from a Windows 10 computer to your Raspberry Pi with IP Address 192.168.0.100:
+Example command for copying from a Windows 10 computer to your Raspberry Pi with IP Address 10.64.104.10:
 
 ```
-scp "C:\Clipsal\C-Gate2\tag\mike-ess.xml" pi@192.168.0.100:/var/rpi-config/cgate/MY-HOME.xml
+scp "C:\Clipsal\C-Gate2\tag\mike-ess.xml" pi@10.64.104.10:/var/rpi-config/cgate/MY-HOME.xml
 ```
 
 ### C-Gate Monitor
