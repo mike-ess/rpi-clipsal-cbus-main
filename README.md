@@ -13,8 +13,8 @@ These instructions were created on Raspbian Stretch Lite, specifically image ver
 
 You will require the following equipment:
 
-* A working [Clipsal C-Bus system with](https://www.clipsal.com/Trade/Products/Integrated-Systems/C-Bus-Control-and-Management-System) with a [RS-232 PC Interface model 5500PC](http://www2.clipsal.com/cis/technical/product_groups/cbus/system_units_and_accessories/pc_interface).
-* 1x Raspberry Pi kit (Raspberry Pi Model 3B, 16GB micro SD card, power supply and case.
+* A working [Clipsal C-Bus system with](https://www.clipsal.com/Trade/Products/Integrated-Systems/C-Bus-Control-and-Management-System) with a [RS-232 PC Interface model 5500PC](https://www.clipsal.com/Trade/Products/ProductDetail?catno=5500PC).
+* 1x Raspberry Pi kit ([Raspberry Pi Model 3B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/), 16GB micro SD card, power supply and case).
 * A USB mouse and USB keyboard. These are only required for initial setup, and are not be needed long term.
 
 Additionally, some wiring will be required to connect the Raspberry Pi to the Clipsal Serial Connector. For this, you need:
@@ -57,7 +57,7 @@ Write the image to your SD Card. A suitable tool for this purpose is Etcher, dow
 
 ## Temporary Installation
 
-Initially, connect the Raspberry Pi to a keyboard, mouse and any monitor or TV with HDMI connections. If you are using a wired network connection, also connect to the network now.
+Initially, connect the Raspberry Pi to a USB keyboard, USB mouse and any HDMI capable monitor or TV. If you are using a wired network connection, also connect to the network now.
 
 Power on the Raspberry Pi. When it loads, login with username=**pi** and password=**raspberry**.
 
@@ -93,13 +93,19 @@ If your Raspberry Pi is intended to be connected to Wi-Fi, when select Option 2 
 
 ### Localisation Settings
 
-Select Option 4 > Option I2 to select your time zone. This is important because the default is UK keyboard layout, which will not be right for many users.
+Select Option 4 > Option I2 to select your time zone.
 
 ![Menu Screenshot](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-option-4.png "Menu Screenshot")
 
 ![Menu Screenshot](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-option-i2.png "Menu Screenshot")
 
-Exit **raspi-config**.
+Select Option 4 > Option I3 to select your keyboard layout. This is important because the default is UK keyboard layout, which will not be right for many users. A US keyboard may be preferred.
+
+![Menu Screenshot](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-option-4.png "Menu Screenshot")
+
+![Menu Screenshot](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspi-config-option-i3.png "Menu Screenshot")
+
+Exit **raspi-config**. If prompted to reboot, then do so, and then login again using your new credentials for the pi user.
 
 ### Fixed IP Address
 
@@ -123,7 +129,7 @@ The new IP address will not take affect until the Raspberry Pi is next restarted
 
 ### Serial Interface Settings
 
-Type ```systemctl disable hciuart``` to disable unwanted usage of the UART serial interface.
+Type ```sudo systemctl disable hciuart``` to disable unwanted usage of the UART serial interface.
 
 Type ```sudo nano /boot/config.txt``` to edit the config.txt file.
 
@@ -145,9 +151,8 @@ Save and close the file.
 ### SSH client
 
 Type `sudo apt-get -y install ssh` to install the SSH server. This may be used to connect to the Raspberry Pi using an SSH client such as Putty.
-```
-systemctl enable ssh.service
-```
+
+Type `sudo systemctl enable ssh.service` to enable the SSH server. 
 
 ### Firmware Update
 
@@ -157,8 +162,6 @@ Type these commands to update the firmware.
 sudo rpi-update
 ```
 
-After the Raspberry Pi has had time to restart, login again via SSH.
-
 ### Restart
 
 Reboot the Raspberry Pi by typing:
@@ -166,7 +169,7 @@ Reboot the Raspberry Pi by typing:
 ```
 sudo shutdown -r now
 ``` 
-Wait for the reboot, then login using login with username = **pi** and password = the password you set moments earlier.
+Wait for the reboot, then login as the **pi**user again.
 
 ### Verify Configuration
 
@@ -186,7 +189,7 @@ You are ready to connect the Raspberry Pi to C-Bus.
 
 TODO: Add more detail here.
 
-Power the Raspberry Pi up again, and login via SSH.
+Power the Raspberry Pi up again, and login via SSH as the **pi** user.
 
 ## Further Setup
 
@@ -358,7 +361,6 @@ docker run --d --network=host -p 10.64.104.12:5353:5353 -p 10.64.104.12:51826:51
 
 ### rpi-ser2sock
 
-Linked to Host:
 ```
 docker run --name=rpi-ser2sock \
   -d \
@@ -372,7 +374,6 @@ docker run --name=rpi-ser2sock \
 
 ### rpi-cgate
 
-Linked to Host:
 ```
 docker run --name=rpi-cgate \
   -d \
@@ -388,7 +389,6 @@ docker run --name=rpi-cgate \
 
 ### rpi-cgate-monitor
 
-Linked to Host:
 ```
 docker run --name=rpi-cgate-monitor \
   -d \
