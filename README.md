@@ -18,7 +18,8 @@ These instructions were created on Raspbian Stretch Lite, specifically image ver
 
 ## Necessary Raspberry Pi Equipment
 
-* 1x Raspberry Pi Kit ([Raspberry Pi Model 3B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/) including:
+* 1x Raspberry Pi Kit including:
+* ([Raspberry Pi Model 3B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/).
 * 16GB micro SD card.
 * Power supply.
 * Raspberry Pi case.
