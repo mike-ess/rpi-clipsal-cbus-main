@@ -11,24 +11,49 @@ These instructions were created on Raspbian Stretch Lite, specifically image ver
 
 # Get prepared
 
-You will require the following equipment:
+## Necessary Clipsal C-Bus Equipment
 
-* A working [Clipsal C-Bus system with](https://www.clipsal.com/Trade/Products/Integrated-Systems/C-Bus-Control-and-Management-System) with a [RS-232 PC Interface model 5500PC](https://www.clipsal.com/Trade/Products/ProductDetail?catno=5500PC).
-* 1x Raspberry Pi kit ([Raspberry Pi Model 3B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/), 16GB micro SD card, power supply and case).
+* A working [Clipsal C-Bus system with](https://www.clipsal.com/Trade/Products/Integrated-Systems/C-Bus-Control-and-Management-System)
+* A [Clipsal RS-232 PC Interface model 5500PC](https://www.clipsal.com/Trade/Products/ProductDetail?catno=5500PC).
+
+## Necessary Raspberry Pi Equipment
+
+* 1x Raspberry Pi Kit ([Raspberry Pi Model 3B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/) including:
+* 16GB micro SD card.
+* Power supply.
+* Raspberry Pi case.
 * A USB mouse and USB keyboard. These are only required for initial setup, and are not be needed long term.
+
+## Necessary Wiring Equipment
 
 Additionally, some wiring will be required to connect the Raspberry Pi to the Clipsal Serial Connector. For this, you need:
 
-* 1x Cat5 cable
-* 1x [soldering iron](https://en.wikipedia.org/wiki/Soldering_iron) and knowledge of how to use one, or a friend who can help you. 
-* 1x RS232 to TTL converter that utilises a MAX3232 chip. Easily found online for very small cost (approximately $1.00). Ideally find one that is just a board, with no connectors on either end.
+* 1x [Cat5 cable](https://en.wikipedia.org/wiki/Category_5_cable), cut to a suitable length for your installation.
+* 1x RS232 to TTL converter that utilises a MAX3232 chip. Easily found online for very small cost (approximately $1.00). Ideally find one that is just a board, with no connectors on either end. About the size of a US penny.
 * 4x [Dupont wire](https://en.wikipedia.org/wiki/Jump_wire) with female on one end. What is on the other end does not matter, it will be cut off.
+* 1x [RJ-45](https://en.wikipedia.org/wiki/Modular_connector#8P8C) Plug.
+* Some short lengths of [Heat shrink](https://en.wikipedia.org/wiki/Heat-shrink_tubing), or [Electrical Tape](https://en.wikipedia.org/wiki/Electrical_tape).
+
+![Photo of MAX3232](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/max3232-back "Photo of MAX3232")
+
+![Photo of MAX3232](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/max3232-front "Photo of MAX3232")
+
+## Necessary Tools
+
+* [Soldering Iron](https://en.wikipedia.org/wiki/Soldering_iron) and knowledge of how to use one, or a friend who can help you. 
+* A sharp hobby knife.
+* A [RJ-45](https://en.wikipedia.org/wiki/Modular_connector#8P8C) crimping tool.
+* [Side cutters](https://en.wikipedia.org/wiki/Diagonal_pliers).
+
+![Photo of Tools](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/tools.png "Photo of Tools")
 
 The intention is to connect into the rear (i.e. permanent) serial connection on the C-Bus PC Interface, achieved through an RJ-45 connector. The 9-pin connector on the front of the C-Bus PC Interface will not be used, because this is intended for temporary connection during initial installation.
 
 <http://www.cleverhome.com.au/manuals/Clipsal-C-Bus-5500PC-PC-Interface-Installation.pdf>
 
-The wiring needs to be like this:
+
+
+
 
 TODO
 
