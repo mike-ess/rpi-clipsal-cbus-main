@@ -8,7 +8,6 @@ The instructions below were created on a Raspberry Pi Model 3B with 16GB SD Card
 
 These instructions were created on Raspbian Stretch Lite, specifically image version **2018-06-27-raspbian-stretch-lite.img**.
 
-
 # Get prepared
 
 ## Necessary Clipsal C-Bus Equipment
@@ -125,20 +124,6 @@ The final product looks like this:
 
 ![Photo of Raspberry Pi](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/rpi-complete2.png "Photo of Raspberry Pi")
 
-
-
-
-
-
-
-### Raspberry Pi
-
-You will require the following equipment:
-
-* 1x Raspberry Pi kit (Raspberry Pi Model 3B, 16GB micro SD card, power supply and case.
-* A USB mouse and USB keyboard. These are only required for initial setup, and are not be needed long term.
-
-
 ## Operating System
 
 Download Raspbian Stretch Lite image from <https://www.raspberrypi.org/downloads/raspbian/> . Download the zip version, and then extract the image file (with .img extension).
@@ -148,6 +133,8 @@ Write the image to your SD Card. A suitable tool for this purpose is Etcher, dow
 ## Temporary Installation
 
 Initially, connect the Raspberry Pi to a USB keyboard, USB mouse and any HDMI capable monitor or TV. If you are using a wired network connection, also connect to the network now.
+
+**At this stage, do not connect the serial cable to the Clipsal C-Bus system. This is because the serial interface on the Rasberry Pi is not correctly configured yet.**
 
 Power on the Raspberry Pi. When it loads, login with username=**pi** and password=**raspberry**.
 
@@ -275,9 +262,7 @@ If you can login OK via SSH, you are ready to go. Shut down the Raspberry Pi by 
 
 Now you can move the Raspberry Pi to its desired location, and you only need to plugin power, plus a network cable if you are not using Wi-Fi. 
 
-You are ready to connect the Raspberry Pi to C-Bus.
-
-TODO: Add more detail here.
+**You are now ready to connect the Raspberry Pi to C-Bus.**
 
 Power the Raspberry Pi up again, and login via SSH as the **pi** user.
 
