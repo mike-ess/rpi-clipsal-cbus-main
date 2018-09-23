@@ -14,12 +14,12 @@ These instructions were created on Raspbian Stretch Lite, specifically image ver
 ## Necessary Clipsal C-Bus Equipment
 
 * A working [Clipsal C-Bus system with](https://www.clipsal.com/Trade/Products/Integrated-Systems/C-Bus-Control-and-Management-System)
-* A [Clipsal RS-232 PC Interface model 5500PC](https://www.clipsal.com/Trade/Products/ProductDetail?catno=5500PC).
+* A working [Clipsal RS-232 PC Interface model 5500PC](https://www.clipsal.com/Trade/Products/ProductDetail?catno=5500PC) on the C-Bus Network..
 
 ## Necessary Raspberry Pi Equipment
 
 * 1x Raspberry Pi Kit including:
-* ([Raspberry Pi Model 3B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/).
+* [Raspberry Pi Model 3B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/).
 * 16GB micro SD card.
 * Power supply.
 * Raspberry Pi case.
@@ -41,18 +41,12 @@ Additionally, some wiring will be required to connect the Raspberry Pi to the Cl
 
 ## Necessary Tools
 
-* [Soldering Iron](https://en.wikipedia.org/wiki/Soldering_iron) and knowledge of how to use one, or a friend who can help you. 
+* A [Soldering Iron](https://en.wikipedia.org/wiki/Soldering_iron) and knowledge of how to use one, or a friend who can help you. 
 * A sharp hobby knife.
 * A [RJ-45](https://en.wikipedia.org/wiki/Modular_connector#8P8C) crimping tool.
-* [Side cutters](https://en.wikipedia.org/wiki/Diagonal_pliers).
+* Some [Side cutters](https://en.wikipedia.org/wiki/Diagonal_pliers).
 
 ![Photo of Tools](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/tools.png "Photo of Tools")
-
-
-
-
-
-TODO
 
 # Installation and Configuration
 
@@ -61,6 +55,12 @@ TODO
 ### Serial Interface
 
 The intention is to connect into the rear (i.e. permanent) serial connection on the C-Bus PC Interface, achieved through an RJ-45 connector. 
+
+Specifications from the Clipsal documentation:
+
+![Clipsal Documentation](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/clipsal-5500pc-rj45-pin-specifications.png "Clipsal Documentation")
+
+![Clipsal Documentation](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/clipsal-5500pc-rj45-wiring-diagram.png "Clipsal Documentation")
 
 The 9-pin connector on the front of the C-Bus PC Interface will not be used, because this is intended for temporary connection during initial installation.
 
