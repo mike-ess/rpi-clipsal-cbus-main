@@ -103,7 +103,19 @@ MAX3232 in the middle:
 Raspberry Pi:
 ![Photo of Raspberry Pi](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/r-pi-gpio.png "Photo of Raspberry Pi")
 
-It is also recommended to cover the MAX3232 with heat shrink, or insultation tape, to avoid any problems with the circuits touching other electronics including the Raspberry Pi motherboard.
+Wire everthing up as described above, using a [soldering iron](https://en.wikipedia.org/wiki/Soldering_iron) on the MAX3232 circuit.
+
+For the RJ45 connector, use a crimping tool. Pay special attention to the RJ45 connector, to ensure the correct colour wires are placed into the correct slots, after crimping there is no way to change it without cutting the RJ45 plug and adding another. Also ensure the three wires are stripped to a suitable length, and the five unused wires are trimmed back.
+
+![Photo before Crimping](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/cat5-length.png "Photo before Crimping")
+
+![Photo before Crimping](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/cat5-aligned.png "Photo before Crimping")
+
+![Photo of Crimping](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/cat5-crimp.png "Photo of Crimping")
+
+![Photo of RJ45](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/cat5-complete.png "Photo of RJ45")
+
+It is also recommended to cover the MAX3232 with heat shrink, or insultation tape, to avoid any problems with the circuits touching other electronics including the Raspberry Pi motherboard. The heat shrink is best put on the wires before the end plugs are attached.
 
 You can also drill a 6mm hole in the case somewhere, near the edge, and cut away any residual plastic shavings with a hobby knife, to allow the Cat5 cable to cleanly exit the Raspberry Pi case.
 
