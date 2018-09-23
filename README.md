@@ -47,11 +47,7 @@ Additionally, some wiring will be required to connect the Raspberry Pi to the Cl
 
 ![Photo of Tools](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/tools.png "Photo of Tools")
 
-# Installation and Configuration
-
-## Hardware
-
-### Serial Interface
+# Serial Interface Wiring
 
 The intention is to connect into the rear (i.e. permanent) serial connection on the C-Bus PC Interface, achieved through an RJ-45 connector. 
 
@@ -124,7 +120,7 @@ The final product looks like this:
 
 ![Photo of Raspberry Pi](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/rpi-complete2.png "Photo of Raspberry Pi")
 
-## Operating System
+# Operating System Installation
 
 Download Raspbian Stretch Lite image from <https://www.raspberrypi.org/downloads/raspbian/> . Download the zip version, and then extract the image file (with .img extension).
 
