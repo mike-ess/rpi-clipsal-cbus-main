@@ -34,9 +34,9 @@ Additionally, some wiring will be required to connect the Raspberry Pi to the Cl
 * 1x [RJ-45](https://en.wikipedia.org/wiki/Modular_connector#8P8C) Plug.
 * Some short lengths of [Heat shrink](https://en.wikipedia.org/wiki/Heat-shrink_tubing), or [Electrical Tape](https://en.wikipedia.org/wiki/Electrical_tape).
 
-![Photo of MAX3232](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/max3232-back "Photo of MAX3232")
+![Photo of MAX3232](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/max3232-back.png "Photo of MAX3232")
 
-![Photo of MAX3232](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/max3232-front "Photo of MAX3232")
+![Photo of MAX3232](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/max3232-front.png "Photo of MAX3232")
 
 ## Necessary Tools
 
