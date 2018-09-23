@@ -30,7 +30,7 @@ These instructions were created on Raspbian Stretch Lite, specifically image ver
 Additionally, some wiring will be required to connect the Raspberry Pi to the Clipsal Serial Connector. For this, you need:
 
 * 1x [Cat5 cable](https://en.wikipedia.org/wiki/Category_5_cable), cut to a suitable length for your installation.
-* 1x RS232 to TTL converter that utilises a MAX3232 chip. Easily found online for very small cost (approximately $1.00). Ideally find one that is just a board, with no connectors on either end. About the size of a US penny.
+* 1x RS232 to TTL converter that utilises a [MAX3232](https://en.wikipedia.org/wiki/MAX232) chip. Easily found online for very small cost (approximately $1.00). Ideally find one that is just a board, with no connectors on either end. About the size of a US penny.
 * 4x [Dupont wire](https://en.wikipedia.org/wiki/Jump_wire) with female on one end. What is on the other end does not matter, it will be cut off.
 * 1x [RJ-45](https://en.wikipedia.org/wiki/Modular_connector#8P8C) Plug.
 * Some short lengths of [Heat shrink](https://en.wikipedia.org/wiki/Heat-shrink_tubing), or [Electrical Tape](https://en.wikipedia.org/wiki/Electrical_tape).
@@ -48,10 +48,6 @@ Additionally, some wiring will be required to connect the Raspberry Pi to the Cl
 
 ![Photo of Tools](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/tools.png "Photo of Tools")
 
-The intention is to connect into the rear (i.e. permanent) serial connection on the C-Bus PC Interface, achieved through an RJ-45 connector. The 9-pin connector on the front of the C-Bus PC Interface will not be used, because this is intended for temporary connection during initial installation.
-
-<http://www.cleverhome.com.au/manuals/Clipsal-C-Bus-5500PC-PC-Interface-Installation.pdf>
-
 
 
 
@@ -62,6 +58,67 @@ TODO
 
 ## Hardware
 
+### Serial Interface
+
+The intention is to connect into the rear (i.e. permanent) serial connection on the C-Bus PC Interface, achieved through an RJ-45 connector. 
+
+The 9-pin connector on the front of the C-Bus PC Interface will not be used, because this is intended for temporary connection during initial installation.
+
+This is a simple serial implementation, requiring use of:
+
+* Positive Voltage
+* Ground (GND)
+* Transmit (TX)
+* Receive (RX)
+
+The Positive Voltage differs on each device
+
+* Raspberry Pi uses TTL, +5v
+* Clipsal 5500OC uses RS232, +3.3V
+
+The purpose of the MAX3232 is to convert between these two.
+
+The wiring required for the TTL end (Raspberry Pi) is:
+
+* GPIO Pin #2 to MAX3232 TTL Positive
+* GPIO Pin #6 to MAX3232 TTL Ground
+* GPIO Pin #8 to MAX3232 TTL Transmit (inbound arrow)
+* GPIO Pin #10 to MAX3232 TTL Receieve (outbound arrow)
+
+The wiring required for the TTL end (Raspberry Pi) is:
+
+* RS232 RJ45 Pin #4 to MAX3232 TTL Negative
+* RS232 RJ45 Pin #5 to MAX3232 TTL Receive (outbound arrow)
+* RS232 RJ45 Pin #6 to MAX3232 TTL Transmit (inbound arrow)
+* There is no Positive required on the RS232 end.
+
+These pictures show it clearly, just follow the colours. Note the colours are **independant and unrelated** on each end of the MAX3232 circuit board.
+
+RJ45 for Clipsal 5500PC:
+![Photo of RJ45](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/cat5-complete.png "Photo of RJ45")
+
+MAX3232 in the middle:
+![Photo of MAX3232](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/max3232-back-wired.png "Photo of MAX3232")
+
+Raspberry Pi:
+![Photo of Raspberry Pi](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/r-pi-gpio.png "Photo of Raspberry Pi")
+
+It is also recommended to cover the MAX3232 with heat shrink, or insultation tape, to avoid any problems with the circuits touching other electronics including the Raspberry Pi motherboard.
+
+You can also drill a 6mm hole in the case somewhere, near the edge, and cut away any residual plastic shavings with a hobby knife, to allow the Cat5 cable to cleanly exit the Raspberry Pi case.
+
+The final product looks like this:
+
+![Photo of Raspberry Pi](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/rpi-complete1.png "Photo of Raspberry Pi")
+
+![Photo of Raspberry Pi](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/rpi-complete2.png "Photo of Raspberry Pi")
+
+
+
+
+
+
+
 ### Raspberry Pi
 
 You will require the following equipment:
@@ -69,11 +126,6 @@ You will require the following equipment:
 * 1x Raspberry Pi kit (Raspberry Pi Model 3B, 16GB micro SD card, power supply and case.
 * A USB mouse and USB keyboard. These are only required for initial setup, and are not be needed long term.
 
-
-### Serial Interface
-
-* Some wiring. A length of Cat5 cable works fine, similer cables are also OK.
-* A RS232 to UART adapter. Look for one containing a MAX3232 integrated circuit.
 
 ## Operating System
 
