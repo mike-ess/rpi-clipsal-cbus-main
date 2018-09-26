@@ -61,6 +61,12 @@ Specifications from the Clipsal documentation:
 
 The 9-pin connector on the front of the C-Bus PC Interface will not be used, because this is intended for temporary connection during initial installation.
 
+## Raspberry Pi Serial Connection Specification
+
+![Photo of GPIO Port on Raspberry Pi](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspberry-pi-pinout.png "Photo of GPIO Port on Raspberry Pi")
+
+## Wiring Explanation
+
 This is a simple serial implementation, requiring use of:
 
 * Positive Voltage
@@ -89,11 +95,7 @@ The wiring required for the TTL end (Raspberry Pi) is:
 * RS232 RJ45 Pin #6 to MAX3232 TTL Transmit (inbound arrow)
 * There is no Positive required on the RS232 end.
 
-## Raspberry Pi Serial Connection Specification
-
-![Photo of GPIO Port on Raspberry Pi](https://github.com/mike-ess/rpi-clipsal-cbus-main/blob/master/images/raspberry-pi-pinout.png "Photo of GPIO Port on Raspberry Pi")
-
-## How to Wire
+## Wiring Photos / Example
 
 These pictures show it clearly, just follow the colours. Note the colours are **independant and unrelated** on each end of the MAX3232 circuit board.
 
