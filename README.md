@@ -319,6 +319,7 @@ Type `docker pull mikeess/rpi-cgate-monitor` to download the Docker image.
 Create a directory to store the C-Gate Monitor configuration:
 ```
 mkdir -p /var/rpi-config/cgate-monitor
+chmod 777 /var/rpi-config/cgate-monitor
 ```
 
 Create the configuration file `/var/rpi-config/cgate-monitor/twitter-config.py` and ensure it contains your Twitter API credentials. You can register with Twitter to use the API, and gain your own set of credentials, at https://developer.twitter.com/en/docs/basics/getting-started .
@@ -374,7 +375,6 @@ cbus_groups = {
     "8":"Bus Coupler 3",
     "9":"Bus Coupler 4",
     "10":"Trigger All Lights On"
-
 }
 
 cbus_units = {
