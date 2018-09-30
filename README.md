@@ -526,7 +526,7 @@ docker run --name rpi-homebridge-cbus \
   --env TZ=`cat /etc/timezone` \
   -i -t \
   --network=host \
-  --mount type=bind,source=/var/rpi-config/homebridge-cbus/config.json,destination=/root/.homebridge/config.json \
+  --mount type=bind,source=/var/rpi-config/homebridge-cbus/.homebridge,destination=/root/.homebridge \
    mikeess/rpi-homebridge-cbus
 ```
 
