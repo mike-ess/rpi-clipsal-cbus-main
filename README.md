@@ -497,7 +497,6 @@ docker run --name=rpi-cgate \
   -d \
   -i -t \
   --env TZ=`cat /etc/timezone` \
-  -p `hostname -I | awk '{print $1;}'`:20023:20023 \
   --network=host \
   --mount type=bind,source=/var/rpi-config/cgate/MYHOME.xml,destination=/clipsal/original-project/MYHOME.xml \
   mikeess/rpi-cgate
