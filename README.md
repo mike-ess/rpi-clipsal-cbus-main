@@ -426,16 +426,52 @@ This is still a work in progress....
 
 Type `docker pull mikeess/rpi-homebridge-cbus` to pull the Docker image from Docker Hub.
 
+Create a directory to store the C-Gate Monitor configuration:
+```
+mkdir -p /var/rpi-config/homebridge-cbus
+chmod 777 /var/rpi-config/homebridge-cbus
+```
+
 Create your config file ```/root/.homebridge/config.json```. For further information about what this file should contain, see the **Configuration** section of the actual [Homebridge-cbus documentation](https://github.com/anthonywebb/homebridge-cbus/blob/master/README.md).
 
-To run the Docker Container interactive:
-```
-docker run -i -t --network=host -p 10.64.104.12:5353:5353 -p 10.64.104.12:51826:51826 --volume=/root:/root:rw  mikeess/rpi-homebridge-cbus
-```
+Note the groups and units *do not* need to be named the same in this configuration, as they are in your C-Gate Toolkit project, or as named for the C-Gate Monitor, but they *should have* the same intent. You will want the names to make sense when displayed on your Apple device(s), and more importantly when spoken to Siri Example: In C-Gate Toolkit, group 5 may be called "5 Kitchen Downstairs" where for CGate Monitor you can just call it "Kitchen Lights".
 
-To run the Docker Container as daemon (recommended):
+Here is a sample of what the data should look like, with the Raspberry Pi having IP address 10.64.104.10. Substitute with your own data, based on your CGate project, and the names you wish to use.
+
 ```
-docker run --d --network=host -p 10.64.104.12:5353:5353 -p 10.64.104.12:51826:51826 --volume=/root:/root:rw  mikeess/rpi-homebridge-cbus
+{
+  "bridge": {
+    "name": "My Home",
+    "username": "CC:22:3D:E3:CE:28",
+    "port": 51826,
+    "pin": "031-45-152"
+  },
+  
+  "description": "My home HomeKit API configuration file",
+ 
+  "platforms": [
+    {
+      "platform": "homebridge-cbus.CBus",
+      "name": "CBus",
+      "client_ip_address": "10.64.104.10",
+      "client_controlport": 20023,
+      "client_cbusname": "MYHOME",
+      "client_network": 254,
+      "client_application": 56,
+      "client_debug": true,
+      
+      "accessories": [
+	    { "type": "dimmer", "id": 1, "name": "Kitchen Lights", "enabled": true },
+        { "type": "dimmer", "id": 2, "name": "Living Room Lights", "enabled": true },
+        { "type": "dimmer", "id": 3, "name": "Bedroom Lights", "enabled": true },
+		{ "type": "dimmer", "id": 4, "name": "Bathroom Lights", "enabled": true },
+        { "type": "dimmer", "id": 5, "name": "Garage Lights", "enabled": true },
+        { "type": "switch", "id": 10, "name": "All Lights Off Trigger", "enabled": true, "activeDuration": "1s"}
+	  ]
+    }
+  ]
+}
+
 ```
 
 ## Start Docker Containers
@@ -444,10 +480,10 @@ docker run --d --network=host -p 10.64.104.12:5353:5353 -p 10.64.104.12:51826:51
 
 ```
 docker run --name=rpi-ser2sock \
+  --rm \
   -d \
   -i -t \
   --env TZ=`cat /etc/timezone` \
-  --expose 10001 \
   --device=/dev/serial0 \
   --network=host \
   mikeess/rpi-ser2sock
@@ -457,12 +493,11 @@ docker run --name=rpi-ser2sock \
 
 ```
 docker run --name=rpi-cgate \
+  --rm \
   -d \
   -i -t \
   --env TZ=`cat /etc/timezone` \
-  -p 127.0.0.1:20023:20023 \
   -p `hostname -I | awk '{print $1;}'`:20023:20023 \
-  --expose 20023 \
   --network=host \
   --mount type=bind,source=/var/rpi-config/cgate/MY-HOME.xml,destination=/clipsal/original-project/MY-HOME.xml \
   mikeess/rpi-cgate
@@ -472,6 +507,7 @@ docker run --name=rpi-cgate \
 
 ```
 docker run --name=rpi-cgate-monitor \
+  --rm \
   -d \
   --env TZ=`cat /etc/timezone` \
   -i -t \
@@ -484,15 +520,15 @@ docker run --name=rpi-cgate-monitor \
 
 ### rpi-homebridge-cbus
 
-This is still a work in progress....
-
 ```
-#docker run -i -t --network=host -p 10.64.104.12:5353:5353 -p 10.64.104.12:51826:51826 --volume=/root:/root:rw  mikeess/rpi-homebridge-cbus
-
-docker run -i -t --network=host -p 5353:5353 -p 51826:51826 --volume=/root:/root:rw  mikeess/rpi-homebridge-cbus
-
-service dbus start && service avahi-daemon start
-homebridge
+docker run --name rpi-homebridge-cbus \
+  --rm \
+  -d \
+  --env TZ=`cat /etc/timezone` \
+  -i -t \
+  --network=host \
+  --mount type=bind,source=/var/rpi-config/homebridge-cbus/config.json,destination=/root/.homebridge/config.json \
+   mikeess/rpi-homebridge-cbus
 ```
 
 ## Authors
