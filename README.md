@@ -306,7 +306,7 @@ Type `docker pull mikeess/rpi-cgate` to download the Docker image.
 
 This image is built on the assumption you already have a C-Gate project file. This project file will have been created by your installer or electrician when C-Bus was installed and configured using the [C-Bus Toolkit](http://www2.clipsal.com/cis/technical/downloads/c-bus_toolkit) software. As part of installation on your Raspberry Pi, you will provide a *copy* of that file on your Raspberry Pi to C-Gate for read-only purposes. Keep your original project file safe, and treat it as your master copy.
 
-The file will need to be called `MY-HOME.xml` regardless of its original filename. 
+The file will need to be called `MYHOME.xml` regardless of its original filename. 
 
 Create a directory to store the C-Gate project file:
 ```
@@ -314,12 +314,12 @@ mkdir -p /var/rpi-config/cgate
 chmod 777 -R /var/rpi-config
 ```
 
-Copy the project file onto your Raspberry Pi and place it in the `/var/rpi-config/cgate` directory. The filename must be set to `MY-HOME.xml`
+Copy the project file onto your Raspberry Pi and place it in the `/var/rpi-config/cgate` directory. The filename must be set to `MYHOME.xml`
 
 Example command for copying from a Windows 10 computer to your Raspberry Pi with IP Address 10.64.104.10:
 
 ```
-scp "C:\Clipsal\C-Gate2\tag\mike-ess.xml" pi@10.64.104.10:/var/rpi-config/cgate/MY-HOME.xml
+scp "C:\Clipsal\C-Gate2\tag\mike-ess.xml" pi@10.64.104.10:/var/rpi-config/cgate/MYHOME.xml
 ```
 
 ### C-Gate Monitor
@@ -352,7 +352,7 @@ cgate_config = {
     "ip_address":"127.0.0.1",
     "command_port":20023,
     "event_port":20025,
-    "cgate_project":"MY-HOME",
+    "cgate_project":"MYHOME",
     "cbus_network":"254",
     "cbus_application":"56"   
 }
@@ -499,7 +499,7 @@ docker run --name=rpi-cgate \
   --env TZ=`cat /etc/timezone` \
   -p `hostname -I | awk '{print $1;}'`:20023:20023 \
   --network=host \
-  --mount type=bind,source=/var/rpi-config/cgate/MY-HOME.xml,destination=/clipsal/original-project/MY-HOME.xml \
+  --mount type=bind,source=/var/rpi-config/cgate/MYHOME.xml,destination=/clipsal/original-project/MYHOME.xml \
   mikeess/rpi-cgate
 ```
 
