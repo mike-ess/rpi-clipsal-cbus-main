@@ -3,9 +3,9 @@
 For people who have a Clipsal C-Bus home automation system, and wish to use a Raspberry Pi to integrate with C-Bus.
 
 You will be able to:
-- Run Clipsal C-Gate software on a Raspberry Pi.
-- Receive push notifications via Twitter when certain events occur on your C-Bus network.
-- Use Apple Homekit to control your C-Bus lights.
+* Run Clipsal C-Gate software on a Raspberry Pi.
+* Receive push notifications via Twitter when certain events occur on your C-Bus network.
+* Use Apple Homekit to control your C-Bus lights.
 
 # Assumptions
 
