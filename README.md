@@ -1,6 +1,11 @@
 # Introduction
 
-THIS IS A WORK IN PROGRESS, NOT FINISHED YET.
+For people who have a Clipsal C-Bus home automation system, and wish to use a Raspberry Pi to integrate with C-Bus.
+
+You will be able to:
+- Run Clipsal C-Gate software on a Raspberry Pi.
+- Receive push notifications via Twitter when certain events occur on your C-Bus network.
+- Use Apple Homekit to control your C-Bus lights.
 
 # Assumptions
 
@@ -422,17 +427,15 @@ event_actions = {
 
 ### Homebridge & Homebridge-CBus
 
-This is still a work in progress....
-
 Type `docker pull mikeess/rpi-homebridge-cbus` to pull the Docker image from Docker Hub.
 
 Create a directory to store the C-Gate Monitor configuration:
 ```
-mkdir -p /var/rpi-config/homebridge-cbus
-chmod 777 /var/rpi-config/homebridge-cbus
+mkdir -p /var/rpi-config/homebridge-cbus/.homebridge
+chmod 777 /var/rpi-config/homebridge-cbus/.homebridge
 ```
 
-Create your config file ```/root/.homebridge/config.json```. For further information about what this file should contain, see the **Configuration** section of the actual [Homebridge-cbus documentation](https://github.com/anthonywebb/homebridge-cbus/blob/master/README.md).
+Create the configuration file `/var/rpi-config/homebridge-cbus/.homebridge/config.json`. For further information about what this file should contain, see the **Configuration** section of the actual [Homebridge-cbus documentation](https://github.com/anthonywebb/homebridge-cbus/blob/master/README.md).
 
 Note the groups and units *do not* need to be named the same in this configuration, as they are in your C-Gate Toolkit project, or as named for the C-Gate Monitor, but they *should have* the same intent. You will want the names to make sense when displayed on your Apple device(s), and more importantly when spoken to Siri Example: In C-Gate Toolkit, group 5 may be called "5 Kitchen Downstairs" where for CGate Monitor you can just call it "Kitchen Lights".
 
@@ -526,7 +529,7 @@ docker run --name rpi-homebridge-cbus \
   --env TZ=`cat /etc/timezone` \
   -i -t \
   --network=host \
-  --mount type=bind,source=/var/rpi-config/homebridge-cbus/.homebridge,destination=/root/.homebridge \
+  --mount type=bind,source=/var/rpi-config/homebridge-cbus/.homebridge,destination=/root/.homebridge,readonly=false \
    mikeess/rpi-homebridge-cbus
 ```
 
